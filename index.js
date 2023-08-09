@@ -8,7 +8,7 @@ function formEncode (payload) {
     return obj;
 }
 
-exports = {
+exports.iam = {
     iam_server_url: 'https://api-oss.domain-dev.site/',
     client_id: '',
     redirect_uri: '',
