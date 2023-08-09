@@ -14,6 +14,12 @@ exports.iam = {
     redirect_uri: '',
     audience: '',
     scope: '',
+    setip(client_id, redirect_uri, audience, scope){
+        this.client_id = client_id
+        this.redirect_uri = redirect_uri
+        this.audience = audience
+        this.scope = scope
+    },
     redirect(){
         let payload = {
             client_id: this.client_id,
