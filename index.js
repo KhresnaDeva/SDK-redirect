@@ -24,6 +24,7 @@ exports.iam = {
         console.log(args)
         console.log('clientid masuk:' + this.CLIENT_ID)
         console.log('redirect uri:' + this.REDIRECT_URI)
+        console.log('iam server url:' + this.iam_server_url)
     },
     redirect: () => {
         let payload = {
@@ -34,6 +35,7 @@ exports.iam = {
         }
         console.log('payload:')
         console.log(payload)
+        console.log('iam server:' + this.iam_server_url)
         let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
         console.log('redirect url =' + redirect_url)
         return redirect_url
