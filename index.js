@@ -8,13 +8,13 @@ function formEncode (payload) {
     return obj;
 }
 
-export const iam = {
+exports.iam = {
     iam_server_url: 'https://api-oss.domain-dev.site',
     client_id: '',
+    client_secret: '',
     redirect_uri: '',
     audience: '',
     scope: '',
-    client_secret: '',
     setup: function(client_id = '', client_secret = '', redirect_uri = '', audience = '', scope = '') {
         this.client_id = client_id
         this.client_secret = client_secret
