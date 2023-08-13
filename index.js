@@ -15,13 +15,15 @@ exports.iam = {
     REDIRECT_URI: '',
     AUDIENCE: '',
     SCOPE: '',
-    setup: function(args) {
+    setup: (args) => {
         this.CLIENT_ID = args.CLIENT_ID
         this.CLIENT_SECRET = args.CLIENT_SECRET
         this.REDIRECT_URI = args.REDIRECT_URI
         this.AUDIENCE = args.AUDIENCE
         this.SCOPE = args.SCOPE
         console.log(args)
+        console.log('clientid masuk:' + this.CLIENT_ID)
+        console.log('redirect uri:' + this.REDIRECT_URI)
     },
     redirect: () => {
         let payload = {
@@ -30,7 +32,10 @@ exports.iam = {
             AUDIENCE: this.AUDIENCE,
             SCOPE: this.SCOPE
         }
+        console.log('payload:')
+        console.log(payload)
         let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
+        console.log('redirect url =' + redirect_url)
         return redirect_url
     },
     getAccessToken: async function(authCode = '') {
