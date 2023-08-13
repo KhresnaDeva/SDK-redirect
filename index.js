@@ -9,7 +9,7 @@ function formEncode (payload) {
 }
 
 exports.iam = {
-    iam_server_url: 'https://api-oss.domain-dev.site',
+    IAM_SERVER: '',
     CLIENT_ID: '',
     CLIENT_SECRET: '',
     REDIRECT_URI: '',
@@ -21,10 +21,11 @@ exports.iam = {
         this.REDIRECT_URI = args.REDIRECT_URI
         this.AUDIENCE = args.AUDIENCE
         this.SCOPE = args.SCOPE
+        this.IAM_SERVER = 'https://api-oss.domain-dev.site'
         console.log(args)
         console.log('clientid masuk:' + this.CLIENT_ID)
         console.log('redirect uri:' + this.REDIRECT_URI)
-        console.log('iam server url:' + this.iam_server_url)
+        console.log('iam server url:' + this.IAM_SERVER)
     },
     redirect: () => {
         let payload = {
@@ -35,8 +36,8 @@ exports.iam = {
         }
         console.log('payload:')
         console.log(payload)
-        console.log('iam server:' + this.iam_server_url)
-        let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
+        console.log('iam server:' + this.IAM_SERVER)
+        let redirect_url = this.IAM_SERVER + '/authorize?' + formEncode(payload)
         console.log('redirect url =' + redirect_url)
         return redirect_url
     },
@@ -49,7 +50,7 @@ exports.iam = {
             REDIRECT_URI: this.REDIRECT_URI,
         }
 
-        const response = await fetch(`${this.iam_server_url}/oauth/token`, {
+        const response = await fetch(`${this.IAM_SERVER}/oauth/token`, {
             method: 'POST',
             data: formEncode(payload),
             headers: {
