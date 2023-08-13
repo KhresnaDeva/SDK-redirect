@@ -32,7 +32,7 @@ export const iam = {
         let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
         return redirect_url
     },
-    getAccessToken: async function(authCode = '', client_secret = '') {
+    getAccessToken: async function(authCode = '') {
         let payload = {
             code: authCode,
             grant_type: "authorization_code",
