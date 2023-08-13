@@ -15,7 +15,7 @@ exports.iam = {
     audience: '',
     scope: '',
     client_secret: '',
-    setup: (client_id, redirect_uri, audience, scope) => {
+    setup: function(client_id, redirect_uri, audience, scope) {
         this.client_id = client_id
         this.redirect_uri = redirect_uri
         this.audience = audience
@@ -31,7 +31,7 @@ exports.iam = {
         let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
         return redirect_url
     },
-    getAccessToken: async (authCode, client_secret) => {
+    getAccessToken: async function(authCode, client_secret) {
         let payload = {
             code: authCode,
             grant_type: "authorization_code",
