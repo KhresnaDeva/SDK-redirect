@@ -1,7 +1,7 @@
-function formEncode (payload) {
+function formEncodeLowerCaseKey (payload) {
     var obj = Object.entries(payload)
     .map(([key, value]) => {
-        return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
+        return `${encodeURIComponent(key.toLowerCase())}=${encodeURIComponent(value)}`
     })
     .join("&");
     //console.log("OBJ ", obj);
@@ -37,7 +37,7 @@ exports.iam = {
         console.log('payload:')
         console.log(payload)
         console.log('iam server:' + this.IAM_SERVER)
-        let redirect_url = this.IAM_SERVER + '/authorize?' + formEncode(payload)
+        let redirect_url = this.IAM_SERVER + '/authorize?' + formEncodeLowerCaseKey(payload)
         console.log('redirect url =' + redirect_url)
         return redirect_url
     },
@@ -52,7 +52,7 @@ exports.iam = {
 
         const response = await fetch(`${this.IAM_SERVER}/oauth/token`, {
             method: 'POST',
-            data: formEncode(payload),
+            data: formEncodeLowerCaseKey(payload),
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
