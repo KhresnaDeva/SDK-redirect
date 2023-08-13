@@ -10,24 +10,24 @@ function formEncode (payload) {
 
 exports.iam = {
     iam_server_url: 'https://api-oss.domain-dev.site',
-    client_id: '',
-    client_secret: '',
-    redirect_uri: '',
-    audience: '',
-    scope: '',
-    setup: function(client_id = '', client_secret = '', redirect_uri = '', audience = '', scope = '') {
-        this.client_id = client_id
-        this.client_secret = client_secret
-        this.redirect_uri = redirect_uri
-        this.audience = audience
-        this.scope = scope
+    CLIENT_ID: '',
+    CLIENT_SECRET: '',
+    REDIRECT_URI: '',
+    AUDIENCE: '',
+    SCOPE: '',
+    setup: function(args) {
+        this.CLIENT_ID = args.CLIENT_ID
+        this.CLIENT_SECRET = args.CLIENT_SECRET
+        this.REDIRECT_URI = args.REDIRECT_URI
+        this.AUDIENCE = args.AUDIENCE
+        this.SCOPE = args.SCOPE
     },
     redirect: () => {
         let payload = {
-            client_id: this.client_id,
-            redirect_uri: this.redirect_uri,
-            audience: this.audience,
-            scope: this.scope
+            CLIENT_ID: this.CLIENT_ID,
+            REDIRECT_URI: this.REDIRECT_URI,
+            AUDIENCE: this.AUDIENCE,
+            SCOPE: this.SCOPE
         }
         let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
         return redirect_url
@@ -36,9 +36,9 @@ exports.iam = {
         let payload = {
             code: authCode,
             grant_type: "authorization_code",
-            client_id: this.client_id,
-            client_secret: this.client_secret,
-            redirect_uri: this.redirect_uri,
+            CLIENT_ID: this.CLIENT_ID,
+            CLIENT_SECRET: this.CLIENT_SECRET,
+            REDIRECT_URI: this.REDIRECT_URI,
         }
 
         const response = await fetch(`${this.iam_server_url}/oauth/token`, {
