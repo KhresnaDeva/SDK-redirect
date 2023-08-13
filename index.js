@@ -4,7 +4,7 @@ function formEncode (payload) {
         return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`
     })
     .join("&");
-    console.log("OBJ ", obj);
+    //console.log("OBJ ", obj);
     return obj;
 }
 
