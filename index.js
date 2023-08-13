@@ -8,15 +8,16 @@ function formEncode (payload) {
     return obj;
 }
 
-exports.iam = {
+export const iam = {
     iam_server_url: 'https://api-oss.domain-dev.site',
     client_id: '',
     redirect_uri: '',
     audience: '',
     scope: '',
     client_secret: '',
-    setup: function(client_id, redirect_uri, audience, scope) {
+    setup: function(client_id = '', client_secret = '', redirect_uri = '', audience = '', scope = '') {
         this.client_id = client_id
+        this.client_secret = client_secret
         this.redirect_uri = redirect_uri
         this.audience = audience
         this.scope = scope
@@ -31,12 +32,12 @@ exports.iam = {
         let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
         return redirect_url
     },
-    getAccessToken: async function(authCode, client_secret) {
+    getAccessToken: async function(authCode = '', client_secret = '') {
         let payload = {
             code: authCode,
             grant_type: "authorization_code",
             client_id: this.client_id,
-            client_secret: client_secret,
+            client_secret: this.client_secret,
             redirect_uri: this.redirect_uri,
         }
 
