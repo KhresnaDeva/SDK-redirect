@@ -21,6 +21,7 @@ exports.iam = {
         this.REDIRECT_URI = args.REDIRECT_URI
         this.AUDIENCE = args.AUDIENCE
         this.SCOPE = args.SCOPE
+        console.log(args)
     },
     redirect: () => {
         let payload = {
