@@ -9,25 +9,47 @@ function formEncode (payload) {
 }
 
 exports.iam = {
-    iam_server_url: 'https://api-oss.domain-dev.site/',
+    iam_server_url: 'https://api-oss.domain-dev.site',
     client_id: '',
     redirect_uri: '',
     audience: '',
     scope: '',
-    setup(client_id, redirect_uri, audience, scope){
+    client_secret: '',
+    setup: (client_id, redirect_uri, audience, scope) => {
         this.client_id = client_id
         this.redirect_uri = redirect_uri
         this.audience = audience
         this.scope = scope
     },
-    redirect(){
+    redirect: () => {
         let payload = {
             client_id: this.client_id,
             redirect_uri: this.redirect_uri,
             audience: this.audience,
             scope: this.scope
         }
-        let redirect_url = this.iam_server_url + 'authorize?' + formEncode(payload)
+        let redirect_url = this.iam_server_url + '/authorize?' + formEncode(payload)
         return redirect_url
+    },
+    getAccessToken: async (authCode, client_secret) => {
+        let payload = {
+            code: authCode,
+            grant_type: "authorization_code",
+            client_id: this.client_id,
+            client_secret: client_secret,
+            redirect_uri: this.redirect_uri,
+        }
+
+        const response = await fetch(`${this.iam_server_url}/oauth/token`, {
+            method: 'POST',
+            data: formEncode(payload),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+
+        const data = response.json()
+        return data
     }
+
 }
